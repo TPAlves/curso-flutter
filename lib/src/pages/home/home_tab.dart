@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:greengrocer/src/auth/sign_in_screen.dart';
+import 'package:greengrocer/src/config/app_data.dart';
+import 'package:greengrocer/src/pages/auth/sign_in_screen.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
-import 'package:greengrocer/src/home/components/category_tile.dart';
+import 'package:greengrocer/src/pages/home/components/category_tile.dart';
 
 class HomeTab extends StatefulWidget {
   HomeTab({super.key});
@@ -13,14 +14,6 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   String selectedCategory = 'Frutas';
 
-  List<String> categories = [
-    'Frutas',
-    'Verduras',
-    'Legumes',
-    'Cereais',
-    'Carnes',
-    'Laticínios',
-  ];
 
   @override
   Widget build(BuildContext context) {
