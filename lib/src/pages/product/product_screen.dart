@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/models/item_model.dart';
+import 'package:greengrocer/src/pages/utils/quantity_widget.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
-class ProductScreen extends StatelessWidget {
-  final ItemModel item;
-  final UtilsServices utilsServices;
+class ProductScreen extends StatefulWidget {
   const ProductScreen({
     super.key,
     required this.item,
     required this.utilsServices,
   });
+
+  final ItemModel item;
+  final UtilsServices utilsServices;
+
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
+  int quantityValue = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +31,10 @@ class ProductScreen extends StatelessWidget {
           Column(
             children: [
               Expanded(
-                child: Hero(tag: item.image, child: Image.asset(item.image)),
+                child: Hero(
+                  tag: widget.item.image,
+                  child: Image.asset(widget.item.image),
+                ),
               ),
               Expanded(
                 child: Container(
@@ -47,7 +59,7 @@ class ProductScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              item.itemName,
+                              widget.item.itemName,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style: const TextStyle(
@@ -56,17 +68,24 @@ class ProductScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Container(
-                            height: 30,
-                            width: 70,
-                            color: Colors.blueAccent,
+
+                          // Quantidade
+                          QuantityWidget(
+                            value: quantityValue,
+                            unitMeasureText: widget.item.unit,
+                            result: (quantity) {
+                              setState(() {
+                                quantityValue = quantity;
+                              });
+                              print(quantity);
+                            },
                           ),
                         ],
                       ),
 
                       // Preço
                       Text(
-                        utilsServices.priceToCurrency(item.price),
+                        widget.utilsServices.priceToCurrency(widget.item.price),
                         style: TextStyle(
                           fontSize: 23,
                           fontWeight: FontWeight.bold,
@@ -80,7 +99,7 @@ class ProductScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: SingleChildScrollView(
                             child: Text(
-                              item.description,
+                              widget.item.description,
                               style: const TextStyle(height: 1.5),
                             ),
                           ),
