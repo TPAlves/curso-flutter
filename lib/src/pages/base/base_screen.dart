@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:greengrocer/src/pages/cart/cart_tab.dart';
 import 'package:greengrocer/src/pages/home/home_tab.dart';
+import 'package:greengrocer/src/services/utils_services.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
@@ -11,6 +13,7 @@ class BaseScreen extends StatefulWidget {
 class _BaseScreenState extends State<BaseScreen> {
   int currentIndex = 0;
   final PageController pageController = PageController();
+  final UtilsServices utilsServices = UtilsServices();
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +22,13 @@ class _BaseScreenState extends State<BaseScreen> {
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
+          // Home
           HomeTab(),
-          Container(color: Colors.blue),
+          // Carinho
+          CartTab(utilsServices: utilsServices),
+          // Pedidos
           Container(color: Colors.green),
+          // Pefil
           Container(color: Colors.yellow),
         ],
       ),
