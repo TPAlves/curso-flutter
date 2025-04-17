@@ -1,11 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
 import 'package:greengrocer/src/config/custom_colors.dart';
+import 'package:greengrocer/src/models/cart_item_model.dart';
+import 'package:greengrocer/src/pages/cart/components/cart_tile.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
-class CartTab extends StatelessWidget {
+class CartTab extends StatefulWidget {
   final UtilsServices utilsServices;
+
   const CartTab({super.key, required this.utilsServices});
+
+  @override
+  State<CartTab> createState() => _CartTabState();
+}
+
+class _CartTabState extends State<CartTab> {
+  void removeItemFromCart(CartItemModel cartItem) {
+    setState(() {
+      appData.cartItems.remove(cartItem);
+    });
+  }
+
+  double updateTotalPrice() {
+    double totalCart = 0;
+    setState(() {
+      for (var e in appData.cartItems) {
+        (totalCart += e.totalPrice());
+      }
+    });
+    return totalCart;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +51,12 @@ class CartTab extends StatelessWidget {
             child: ListView.builder(
               itemCount: appData.cartItems.length,
               itemBuilder: (_, index) {
-                return Text(appData.cartItems[index].item.itemName);
+                return CartTile(
+                  cartItem: appData.cartItems[index],
+                  utilsServices: widget.utilsServices,
+                  remove: removeItemFromCart,
+                  updateTotalPrice: updateTotalPrice,
+                );
               },
             ),
           ),
@@ -49,7 +78,7 @@ class CartTab extends StatelessWidget {
               children: [
                 const Text('Total Geral', style: TextStyle(fontSize: 12)),
                 Text(
-                  utilsServices.priceToCurrency(50),
+                  widget.utilsServices.priceToCurrency(updateTotalPrice()),
                   style: TextStyle(
                     fontSize: 23,
                     color: CustomColors.customSwatchColor,

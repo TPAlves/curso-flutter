@@ -4,16 +4,19 @@ class QuantityWidget extends StatelessWidget {
   final int value;
   final String unitMeasureText;
   final Function(int quantity) result;
+  final bool isRemovable;
 
   const QuantityWidget({
     super.key,
     required this.value,
     required this.unitMeasureText,
     required this.result,
+    this.isRemovable = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    bool validateButtonQuantity = !isRemovable || value > 1;
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -28,12 +31,14 @@ class QuantityWidget extends StatelessWidget {
         ],
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           _QuantityButton(
-            icon: Icons.remove,
-            color: Colors.grey,
+            icon: validateButtonQuantity ? Icons.remove : Icons.delete_forever,
+            color: validateButtonQuantity ? Colors.grey : Colors.redAccent,
             onPressed: () {
-              int resultCount = value > 1 ? value - 1 : value;
+              if (value == 1 && !isRemovable) return;
+              int resultCount = value == 0 ? value : value - 1;
               result(resultCount);
             },
           ),
