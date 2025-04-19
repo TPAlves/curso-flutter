@@ -28,21 +28,20 @@ class SignInScreen extends StatelessWidget {
                     // Nome do app
                     Text.rich(
                       TextSpan(
-                        style: const TextStyle(fontSize: 40),
+                        style: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
                         children: [
                           TextSpan(
                             text: 'Green',
                             style: TextStyle(
                               color: CustomColors.customSwatchColor,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           TextSpan(
                             text: 'grocer',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: TextStyle(color: Colors.white),
                           ),
                         ],
                       ),
@@ -137,24 +136,12 @@ class SignInScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Row(
                         children: [
-                          Expanded(
-                            child: Divider(
-                              color: Colors.grey.withAlpha(90),
-                              thickness: 2,
-                            ),
-                          ),
-
+                          CustomDivider(),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: const Text('Ou'),
                           ),
-
-                          Expanded(
-                            child: Divider(
-                              color: Colors.grey.withAlpha(90),
-                              thickness: 2,
-                            ),
-                          ),
+                          CustomDivider(),
                         ],
                       ),
                     ),
@@ -190,6 +177,17 @@ class SignInScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CustomDivider extends StatelessWidget {
+  const CustomDivider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Divider(color: Colors.grey.withAlpha(90), thickness: 2),
     );
   }
 }

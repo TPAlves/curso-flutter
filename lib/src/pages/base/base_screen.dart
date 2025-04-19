@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/pages/cart/cart_tab.dart';
 import 'package:greengrocer/src/pages/home/home_tab.dart';
+import 'package:greengrocer/src/pages/orders/orders_tab.dart';
 import 'package:greengrocer/src/pages/profile/profile_tab.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
@@ -24,13 +25,13 @@ class _BaseScreenState extends State<BaseScreen> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           // Home
-          HomeTab(),
+          const HomeTab(),
           // Carinho
           CartTab(utilsServices: utilsServices),
           // Pedidos
-          Container(color: Colors.green),
+          OrdersTab(utilsServices: utilsServices),
           // Pefil
-          ProfileTab(),
+          const ProfileTab(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
