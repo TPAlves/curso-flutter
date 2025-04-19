@@ -3,6 +3,7 @@ import 'package:greengrocer/src/config/app_data.dart' as appData;
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/pages/cart/components/cart_tile.dart';
+import 'package:greengrocer/src/pages/utils/custom_app_bar.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
 class CartTab extends StatefulWidget {
@@ -64,17 +65,7 @@ class _CartTabState extends State<CartTab> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Carrinho',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: CustomColors.backgroundLogin,
-      ),
+      appBar: CustomAppBar(title: "Carrinho"),
       body: Column(
         children: [
           Expanded(

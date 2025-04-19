@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/pages/cart/cart_tab.dart';
 import 'package:greengrocer/src/pages/home/home_tab.dart';
+import 'package:greengrocer/src/pages/profile/profile_tab.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _BaseScreenState extends State<BaseScreen> {
           // Pedidos
           Container(color: Colors.green),
           // Pefil
-          Container(color: Colors.yellow),
+          ProfileTab(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

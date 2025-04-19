@@ -1,5 +1,6 @@
 import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/models/item_model.dart';
+import 'package:greengrocer/src/models/user_model.dart';
 
 List<String> categories = [
   'Frutas',
@@ -71,3 +72,11 @@ List<CartItemModel> cartItems = [
   CartItemModel(item: mango, quantity: 5),
   CartItemModel(item: papaya, quantity: 1),
 ];
+
+UserModel userModel = UserModel(
+  name: "Neymar Jr",
+  email: "ney@neymar.com",
+  phone: "11999999999",
+  cpf: "123.456.789-00",
+  password: "12345678",
+);
