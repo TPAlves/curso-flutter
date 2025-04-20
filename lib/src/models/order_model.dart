@@ -21,18 +21,33 @@ class OrderModel {
 }
 
 enum OrderStatus {
+  confirmed,
   pending,
-  completed,
-  canceled;
+  refunded,
+  paid,
+  preparing,
+  shipped,
+  overdue,
+  completed;
 
   String get name {
     switch (this) {
+      case OrderStatus.confirmed:
+        return 'Confirmado';
       case OrderStatus.pending:
         return 'Pendente';
+      case OrderStatus.refunded:
+        return 'Reembolsado';
+      case OrderStatus.paid:
+        return 'Pago';
+      case OrderStatus.preparing:
+        return 'Preparando';
+      case OrderStatus.shipped:
+        return 'Enviado';
       case OrderStatus.completed:
         return 'Concluído';
-      case OrderStatus.canceled:
-        return 'Cancelado';
+      case OrderStatus.overdue:
+        return 'Pagamento Vencido';
     }
   }
 }

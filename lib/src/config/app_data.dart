@@ -94,7 +94,7 @@ List<OrderModel> orders = [
     createdDateTime: DateTime.now(),
     overdueDateTime: DateTime.now().add(const Duration(days: 3)),
     items: cartItems,
-    status: OrderStatus.pending,
+    status: OrderStatus.refunded,
     copyAndPaste: '123456789',
     total: cartTotal,
   ),
