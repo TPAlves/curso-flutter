@@ -20,6 +20,7 @@ class OrderTile extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
+          initiallyExpanded: order.status == OrderStatus.pending,
           title: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,22 +40,25 @@ class OrderTile extends StatelessWidget {
             ],
           ),
           childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 150,
+            IntrinsicHeight(
               child: Row(
                 children: [
                   // Lista de produtos
                   Expanded(
                     flex: 3,
-                    child: ListView(
-                      children:
-                          order.items.map((orderItem) {
-                            return _OrderItemWidget(
-                              utilsServices: utilsServices,
-                              orderItem: orderItem,
-                            );
-                          }).toList(),
+                    child: SizedBox(
+                      height: 150,
+                      child: ListView(
+                        children:
+                            order.items.map((orderItem) {
+                              return _OrderItemWidget(
+                                utilsServices: utilsServices,
+                                orderItem: orderItem,
+                              );
+                            }).toList(),
+                      ),
                     ),
                   ),
 
@@ -73,10 +77,45 @@ class OrderTile extends StatelessWidget {
                     flex: 2,
                     child: OrderStatusWidget(
                       status: order.status,
-                      isOverdue: order.overdueDateTime.isBefore(DateTime.now()),
+                      isOverdue:
+                          order.overdueDateTime.isBefore(DateTime.now()) &&
+                          order.status != OrderStatus.completed,
                     ),
                   ),
                 ],
+              ),
+            ),
+
+            // Total do pedido
+            Text.rich(
+              TextSpan(
+                style: const TextStyle(fontSize: 20),
+                children: [
+                  const TextSpan(
+                    text: "Total: ",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(text: utilsServices.priceToCurrency(order.total)),
+                ],
+              ),
+            ),
+
+            // Botão de pagamento
+            Visibility(
+              visible: order.status == OrderStatus.pending,
+              child: ElevatedButton.icon(
+                onPressed: () {},
+                label: const Text(
+                  "Visualizar QR Code",
+                  style: TextStyle(color: Colors.white),
+                ),
+                icon: const Icon(Icons.pix, color: Colors.white),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
               ),
             ),
           ],

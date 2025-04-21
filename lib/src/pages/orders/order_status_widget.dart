@@ -13,6 +13,7 @@ class OrderStatusWidget extends StatelessWidget {
     OrderStatus.preparing: 3,
     OrderStatus.shipped: 4,
     OrderStatus.completed: 5,
+    OrderStatus.overdue: 6,
   };
 
   int get currentStatus => allStatus[status]!;
@@ -43,6 +44,26 @@ class OrderStatusWidget extends StatelessWidget {
             isActive: true,
             title: OrderStatus.overdue.name,
             backgroundColor: Colors.redAccent,
+          ),
+        ] else ...[
+          _StatusDot(
+            isActive: currentStatus >= 2,
+            title: OrderStatus.paid.name,
+          ),
+          const _CustomDivider(),
+          _StatusDot(
+            isActive: currentStatus >= 3,
+            title: OrderStatus.preparing.name,
+          ),
+          const _CustomDivider(),
+          _StatusDot(
+            isActive: currentStatus >= 4,
+            title: OrderStatus.shipped.name,
+          ),
+          const _CustomDivider(),
+          _StatusDot(
+            isActive: currentStatus == 5,
+            title: OrderStatus.completed.name,
           ),
         ],
       ],
