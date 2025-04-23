@@ -4,6 +4,7 @@ import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/pages/cart/components/cart_tile.dart';
 import 'package:greengrocer/src/pages/utils/custom_app_bar.dart';
+import 'package:greengrocer/src/pages/utils/payment_dialog.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
 class CartTab extends StatefulWidget {
@@ -111,7 +112,21 @@ class _CartTabState extends State<CartTab> {
                   child: ElevatedButton(
                     onPressed: () async {
                       bool? result = await showOrderConfirmation();
-                      print(result);
+
+                      if (!context.mounted) return;
+
+                      // ?? false -> se o resultado for nulo, retorna false
+                      if (result ?? false) {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return PaymentDialog(
+                              orderModel: appData.orders.first,
+                              utilsServices: widget.utilsServices,
+                            );
+                          },
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/app_data.dart' as app_data;
-import 'package:greengrocer/src/pages/orders/order_tile.dart';
+import 'package:greengrocer/src/pages/orders/components/order_tile.dart';
 import 'package:greengrocer/src/pages/utils/custom_app_bar.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
