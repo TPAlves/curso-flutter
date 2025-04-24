@@ -7,7 +7,16 @@ import 'package:greengrocer/src/services/utils_services.dart';
 class ItemTile extends StatelessWidget {
   final ItemModel item;
   final UtilsServices utilsServices;
-  const ItemTile({super.key, required this.item, required this.utilsServices});
+  final void Function(GlobalKey) cartAnimationMethod;
+
+  ItemTile({
+    super.key,
+    required this.item,
+    required this.utilsServices,
+    required this.cartAnimationMethod,
+  });
+
+  final GlobalKey imageGK = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +48,7 @@ class ItemTile extends StatelessWidget {
                   Expanded(
                     child: Hero(
                       tag: item.image,
-                      child: Image.asset(item.image),
+                      child: Image.asset(item.image, key: imageGK),
                     ),
                   ),
 
@@ -83,7 +92,9 @@ class ItemTile extends StatelessWidget {
           top: 4,
           right: 4,
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              cartAnimationMethod(imageGK);
+            },
             child: Container(
               height: 40,
               decoration: BoxDecoration(
