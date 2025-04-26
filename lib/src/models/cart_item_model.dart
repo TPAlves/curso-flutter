@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:greengrocer/src/models/item_model.dart';
 
 class CartItemModel {

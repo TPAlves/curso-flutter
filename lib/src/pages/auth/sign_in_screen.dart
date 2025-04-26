@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:greengrocer/src/pages/utils/app_name_widget.dart';
 import 'package:greengrocer/src/pages/utils/custom_text_field.dart';
 import 'package:greengrocer/src/pages/auth/sign_up_screen.dart';
 import 'package:greengrocer/src/pages/base/base_screen.dart';
@@ -26,26 +27,7 @@ class SignInScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Nome do app
-                    Text.rich(
-                      TextSpan(
-                        style: const TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'Green',
-                            style: TextStyle(
-                              color: CustomColors.customSwatchColor,
-                            ),
-                          ),
-                          TextSpan(
-                            text: 'grocer',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
+                    AppNameWidget(fontSizeTitle: 40),
                     // Categorias
                     SizedBox(
                       height: 30,
