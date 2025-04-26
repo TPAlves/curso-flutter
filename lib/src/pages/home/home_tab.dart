@@ -24,6 +24,8 @@ class _HomeTabState extends State<HomeTab> {
     runAddToCartAnimation(cartIconKey);
   }
 
+  final UtilsServices utilsServices = UtilsServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,7 +160,6 @@ class _HomeTabState extends State<HomeTab> {
                 ),
                 itemCount: app_data.items.length,
                 itemBuilder: (_, index) {
-                  final UtilsServices utilsServices = UtilsServices();
                   return ItemTile(
                     item: app_data.items[index],
                     utilsServices: utilsServices,

@@ -20,6 +20,10 @@ class _CartTabState extends State<CartTab> {
   void removeItemFromCart(CartItemModel cartItem) {
     setState(() {
       appData.cartItems.remove(cartItem);
+      widget.utilsServices.showToast(
+        message: '${cartItem.item.itemName} removido(a)',
+        isError: false,
+      );
     });
   }
 
@@ -69,6 +73,7 @@ class _CartTabState extends State<CartTab> {
       appBar: CustomAppBar(title: "Carrinho"),
       body: Column(
         children: [
+          // Lista de itens do carrinho
           Expanded(
             child: ListView.builder(
               itemCount: appData.cartItems.length,
